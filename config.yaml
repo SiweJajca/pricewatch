@@ -1,0 +1,30 @@
+# ---------------------------------------------------------------
+# PriceWatch: konfiguracja. Nowy sklep = nowy wpis w "sources".
+# Zadnego kodu nie trzeba ruszac.
+# ---------------------------------------------------------------
+settings:
+  language: pl              # pl | en  (jezyk dashboardu i powiadomien)
+  drop_alert_percent: 5     # od jakiego spadku ceny (%) wysylac alert
+  max_pages: 3              # ile stron listingu pobierac z jednego sklepu
+  delay_seconds: 1          # przerwa miedzy requestami (grzecznosc wobec serwisu)
+  user_agent: "PriceWatch/1.0 (demo bot; kontakt: twoj@email.pl)"
+  data_file: data/history.json
+  output_dir: docs
+
+# Selektory CSS. Zapis "selektor@atrybut" pobiera atrybut zamiast tekstu.
+sources:
+  - name: Books to Scrape        # sandbox stworzony do cwiczen scrapingu
+    url: https://books.toscrape.com/catalogue/page-1.html
+    item: article.product_pod
+    title: h3 a@title
+    price: p.price_color
+    link: h3 a@href
+    next: li.next a@href
+
+  - name: Web Scraper Test Store # sandbox stworzony do cwiczen scrapingu
+    url: https://webscraper.io/test-sites/e-commerce/static/computers/laptops
+    item: div.thumbnail
+    title: a.title@title
+    price: h4.price
+    link: a.title@href
+    next: a[rel=next]@href
